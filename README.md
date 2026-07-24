@@ -144,8 +144,6 @@ No es necesario realizar ninguna configuración adicional para su funcionamiento
 
 Las dependencias utilizadas se encuentran definidas en el archivo `requirements.txt`.
 
-```
-
 ---
 
 ## Autor
