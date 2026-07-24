@@ -15,6 +15,7 @@ from src.logica_python.estimador import Estimador
 DATABASE_PATH = "src/data/fuente_cxc.db"
 SQL_EXTRACT_PATH = "src/sql/extract"
 SQL_LOAD_PATH = "src/sql/load"
+RESULTS_PATH = "src/resultados"
 
 def main() -> None:
     """
@@ -450,6 +451,8 @@ def main() -> None:
         df_original=df_test,
         columna_valor="valor_original"
     )
+
+    estimaciones.to_excel(f"{RESULTS_PATH}/estimaciones.xlsx", index=False)
 
     st.dataframe(
         estimaciones,
