@@ -187,3 +187,12 @@ class PreparadorDatos:
             df_test,
             preprocesador
         )
+
+    def preparar_completo(self, df: pd.DataFrame):
+        df = df.copy()
+        self.validar_columnas(df)
+        df = self.convertir_fechas(df)
+        df = self.crear_variables_fecha(df)
+        df = self.eliminar_columnas(df)
+        X, y = self.separar_variables(df)
+        return X, y, df
