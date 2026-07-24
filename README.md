@@ -145,10 +145,6 @@ No es necesario realizar ninguna configuración adicional para su funcionamiento
 
 Las dependencias utilizadas se encuentran definidas en el archivo `requirements.txt`.
 
-Si se agregan nuevas librerías al proyecto, pueden actualizarse mediante:
-
-```bash
-pip freeze > requirements.txt
 ```
 
 ---
