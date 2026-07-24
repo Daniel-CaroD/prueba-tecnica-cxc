@@ -25,6 +25,8 @@ El proyecto integra consultas SQL, un modelo de Machine Learning desarrollado en
 │   ├── config.toml
 ├── docs
 │   ├── informe_ejecutivo.docx
+├── powebi
+│   ├── dashboard.pbix
 ├── src
 │   ├── data
 │   │   └── fuente_cxc.db
