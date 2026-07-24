@@ -429,16 +429,20 @@ def main() -> None:
     # 2.5 Estimacion
     st.subheader("2.5 Estimación")
 
-    estimador = Estimador()
+    preparador_completo = PreparadorDatos(
+        columna_objetivo="pagada",
+        columnas_fecha=["fecha_creacion"],
+        columnas_categoricas=["producto", "tipo_transaccion"],
+        columnas_numericas=["valor_original"])
 
+    X_full, y_full, df_full = preparador_completo.preparar_completo(modelo_df)
+
+    estimador = Estimador()
     estimaciones = estimador.estimar(
         pipeline=modelo.obtener_pipeline(),
-        X=X_test,
-        df_original=df_test,
+        X=X_full,
+        df_original=df_full,
         columna_valor="valor_pendiente")
-
-    estimaciones["recuperacion_total_estimada"] = (
-        estimaciones["valor_pagado"] + estimaciones["valor_esperado"])
 
     os.makedirs(RESULTS_PATH, exist_ok=True)
     estimaciones.to_excel(f"{RESULTS_PATH}/estimaciones.xlsx", index=False)
