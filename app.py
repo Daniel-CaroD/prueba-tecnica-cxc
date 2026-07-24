@@ -10,6 +10,7 @@ from src.logica_python.preparador import PreparadorDatos
 from src.logica_python.modelo import Modelo
 from src.logica_python.evaluador import Evaluador
 from src.logica_python.estimador import Estimador
+import os
 
 # Rutas
 DATABASE_PATH = "src/data/fuente_cxc.db"
@@ -335,25 +336,10 @@ def main() -> None:
     st.subheader("2.2 Preparación de los Datos")
 
     preparador = PreparadorDatos(
-
         columna_objetivo="pagada",
-
-        columnas_fecha=[
-            "fecha_creacion",
-            "fecha_ultimo_pago"
-        ],
-
-        columnas_categoricas=[
-            "producto",
-            "tipo_transaccion"
-        ],
-
-        columnas_numericas=[
-            "valor_original",
-            "valor_pagado",
-            "valor_pendiente"
-        ]
-    )
+        columnas_fecha=["fecha_creacion"],
+        columnas_categoricas=["producto", "tipo_transaccion"],
+        columnas_numericas=["valor_original"])
 
     (
         X_train,
@@ -449,9 +435,12 @@ def main() -> None:
         pipeline=modelo.obtener_pipeline(),
         X=X_test,
         df_original=df_test,
-        columna_valor="valor_original"
-    )
+        columna_valor="valor_pendiente")
 
+    estimaciones["recuperacion_total_estimada"] = (
+        estimaciones["valor_pagado"] + estimaciones["valor_esperado"])
+
+    os.makedirs(RESULTS_PATH, exist_ok=True)
     estimaciones.to_excel(f"{RESULTS_PATH}/estimaciones.xlsx", index=False)
 
     st.dataframe(
