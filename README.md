@@ -14,7 +14,6 @@ El proyecto integra consultas SQL, un modelo de Machine Learning desarrollado en
 - NumPy
 - Scikit-Learn
 - Streamlit
-- Matplotlib
 
 ---
 
